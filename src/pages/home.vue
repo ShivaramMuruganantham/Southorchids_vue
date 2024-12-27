@@ -167,9 +167,3 @@ export default {
     mixins: [LoggedIn],
 }
 </script>
-
-<style>
-    /* .font-sequelHead{
-        bg-gradient-to-r from-[#00000063] to-[#00000063]
-    } */
-</style>
