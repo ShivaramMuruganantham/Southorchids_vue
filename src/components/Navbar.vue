@@ -58,7 +58,9 @@ export default {
         },
         
         handleScroll() {
+            console.log('ScrollY:', window.scrollY);
             this.isTop = window.scrollY === 0;
+            console.log('isTop:', this.isTop);
         },
     },
 
@@ -67,7 +69,7 @@ export default {
     },
 
     beforeMount() {
-        window.addEventListener('scroll', this.handleScroll);
+        window.removeEventListener('scroll', this.handleScroll);
     },
 }
 </script>

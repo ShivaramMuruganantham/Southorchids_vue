@@ -47,7 +47,7 @@
                         </div>
                         <div class="w-48 p-1">
                             <p class="py-1 text-lg">Subheading</p>
-                            <p class="text-xs">Body text for whatever you’d like to add more to the subheading.</p>
+                            <p class="text-xs">Body text for whatever you’dnp like to add more to the subheading.</p>
                         </div>
                     </div>
                 </div>

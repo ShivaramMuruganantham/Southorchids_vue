@@ -4,6 +4,7 @@ import login from "./pages/login.vue";
 import register from "./pages/register.vue";
 import home from "./pages/home.vue";
 import products from "./pages/products.vue";
+import showpage from "./pages/showpage.vue";
 import about from "./pages/about.vue";
 import contact from "./pages/contact.vue";
 import cart from "./pages/order.vue";
@@ -21,6 +22,7 @@ export default createRouter ({
         {path: '/product', name: 'products', component: products},
         {path: '/about', name: 'about', component: about},
         {path: '/contact', name: 'contact', component: contact},
+        {path: '/product/{id}', name: 'showpage', component: showpage},
         {path: '/cart', name: 'cart', component: cart},
         {path: '/order', name: 'order', component: Order},
         {path: '/order-history', name: 'order_history', component: OrderHistory},
