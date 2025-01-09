@@ -136,13 +136,15 @@ export default {
                     Authorization: `Bearer ${token}`
                 },
                 body: JSON.stringify({ 
-                    amount, 
-                    items: orderItems }),
+                        amount, 
+                        items: orderItems,
+
+                    }),
                 })
                 .then((response) => response.json())
                 .then((order) => {
                     // Razorpay options
-                    console.log("Order Created:", order); // Debug log
+                    console.log("Order Created:", order.order_items); // Debug log
                     console.log("Razorpay Order ID:", order.razorpay_order_id);
                     console.log("Backend Order ID:", order.order_id);
                     
@@ -198,6 +200,10 @@ export default {
                     razorpay_signature: paymentResponse.razorpay_signature,
                     order_id: orderId,
                     phone_no: this.userInfo.phone_no,
+                    items: this.ordersItems.map(item => ({
+                        product_id : item.product_id,
+                        quantity : item.quantity,
+                    })),
                 }),
             })
                 .then(response => response.json())
@@ -253,16 +259,10 @@ export default {
         total_bill() {
             return this.itemsprice + this.shipping_fee;
         },
-
-    },
-    
-    mounted() {
-        
     },
 
     created() {
         this.GetUserData();
-        console.log(this.ordersItems);
     },
     
 }
