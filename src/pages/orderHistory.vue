@@ -10,7 +10,11 @@
                 <p>Order ID : <span>#{{ order.id }}</span></p>
                 <p>Order Date : <span>{{ order.order_date }}</span></p>
             </div>
-            <p>Payment : <span>{{ order.status }}</span> </p>
+            <div>
+                <p>Payment : <span>{{ order.payment_status }}</span> </p>
+                <p>Delivery status : <span>{{ order.delivery_status }}</span> </p>
+                
+            </div>
         </div>
         <div v-for="item in order.items" :key="item.product_name" class="flex items-center p-4 my-4 border">
             <img :src="item.product_image" alt="" class="h-16">
