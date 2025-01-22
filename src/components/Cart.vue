@@ -138,12 +138,13 @@ export default {
             else {
                 alert('Cart Is empty')
             }
-        }
+        },
+        
         
     },
 
     mounted() {
-        this.getCartItems();
+        document.addEventListener('DOMContentLoaded', this.getCartItems);
     },
 }
 </script>
