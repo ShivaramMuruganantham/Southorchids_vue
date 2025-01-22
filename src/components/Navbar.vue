@@ -58,9 +58,9 @@ export default {
         },
         
         handleScroll() {
-            console.log('ScrollY:', window.scrollY);
-            this.isTop = window.scrollY === 0;
-            console.log('isTop:', this.isTop);
+            // console.log('ScrollY:', window.scrollY);
+            this.isTop = window.scrollY == 0;
+            // console.log('isTop:', this.isTop);
         },
     },
 

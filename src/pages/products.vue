@@ -10,7 +10,7 @@
             <div class="flex flex-wrap justify-between gap-5 p-5">
                 <div class="relative border rounded-xl h-[550px]" v-for="product in products" :key="product.id">
                     <div class="h-56 px-5 border shadow rounded-t-xl min-w-56">
-                        <img :src="product.product_image" alt="" class="w-full h-full">
+                        <img :src="product.product_image" :alt="product.name" v-if="product.product_image" class="w-full h-full">
                     </div>
                     <div class="p-3">
                         <p class="pt-2 font-bold text-md">{{product.name}} ({{ product.quantity }} {{ product.quantity > 20 ? 'ML' : 'Kg' }})</p>
@@ -117,6 +117,7 @@ export default {
                 ...product,
                 cart_quantity: 0,
             }));
+            console.log(this.products);
         })
         .catch((error)=>{
             console.error("Error fetching products:", error);
