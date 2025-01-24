@@ -26,5 +26,8 @@ export default createRouter ({
         {path: '/cart', name: 'cart', component: cart},
         {path: '/order', name: 'order', component: Order},
         {path: '/order-history', name: 'order_history', component: OrderHistory},
-    ]
+    ],
+    scrollBehavior() {
+        return { top: 0 }
+    }
 })
