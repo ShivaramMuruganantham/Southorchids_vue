@@ -10,6 +10,7 @@ export default{
             localStorage.removeItem('api_token');
             localStorage.removeItem('name'); 
             this.$router.push({name: 'home'});
+            location.reload();
         }
     },
 
