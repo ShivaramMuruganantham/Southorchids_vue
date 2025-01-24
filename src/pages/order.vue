@@ -1,91 +1,75 @@
 <template>
-    <div>
-        <div class="flex items-center justify-between px-16 border">
-            <img src="../../public/Logo/logo so.png" alt="" class="h-24">
-            <p class="text-3xl text-center ">Checkout Page</p>        
-            <h1 class="text-2xl font-bold">{{userInfo.name}}</h1>
-        </div>
-        <div class="flex justify-around px-10 py-10">
-            <div>
-                <div class="p-10 px-20 overflow-y-scroll border border-l-2 rounded-lg shadow-lg border-l-green-400 max-h-[515px]">
-                    <p class="text-2xl underline">Your Orders</p>
-                    <div v-for="items in ordersItems" :key="items.id" class="flex gap-10 p-5 my-5 border rounded shadow-md">
+    <div class="flex items-center justify-between p-4 px-16 border shadow max-sm:px-8">
+        <a @click="$router.go(-1)" class="text-3xl"><i class="icon ion-md-arrow-back"></i></a>
+        <h1 class="text-2xl font-bold max-sm:text-lg">{{userInfo.name}}</h1>
+    </div>
+    <div class="p-5 max-sm:p-2">
+        <p class="text-2xl text-center font-medium max-sm:py-3">Checkout Page</p>        
+        <div class="p-5 max-sm:p-2">
+            <div class="border p-5 my-2 shadow-md max-sm:p-2">
+                <p class="px-3 text-2xl underline max-sm:text-xl">Orders :</p>
+                <div v-for="items in ordersItems" :key="items.id" class="flex gap-3 w-full border-b-2 p-4 pt-5 max-sm:p-1 max-sm:pt-3 max-sm:gap-1">
+                    <img src="/public/images/product/ChocolateOwn.jpg" alt="" class="h-24 border max-sm:h-20 max-sm:w-20">
+                    <div class="flex justify-between w-full items-center">
                         <div>
-                            <img :src="items.product.product_image" alt="" class="w-32 h-36">
+                            <p class="font-medium max-sm:text-xs">{{ items.product.name }} <span>({{ items.product.quantity }})</span></p>
+                            <p class="text-sm font-medium max-sm:text-xs">{{ items.product.brand }}</p>
+                            <p class="w-56 text-xs max-sm:w-20">{{items.product.description}}</p>
                         </div>
-                        <div class="flex items-center gap-24">
-                            <div class="w-68">
-                                <p class="py-1 text-xl font-medium">{{items.product.name}} ({{ items.product.quantity }})</p>
-                                <p class="pb-2 text-lg ">{{ items.product.brand }}</p>
-                                <p class="py-2 text-lg text-yellow-400">Quantity x <span>{{ items.quantity }}</span></p>
-                            </div>
-                            <div class="flex pr-4 w-36">
-                                <div>
-                                    <p class="py-2 text-xl font-medium text-green-400"><span class="text-sm">Our price</span> {{ items.product.price }}</p>
-                                    <p class="py-2 text-gray-400 line-through"><span>MRP:</span> {{ items.product.mrp_price }}</p>
-                                    <p class="py-2 text-lg font-medium text-yellow-400"><span class="text-sm">Total price</span> {{ items.total_price }}</p>
-                                </div>
-                            </div>
-                        </div>
+                        <p class="max-sm:text-xs"><span class="text-red-400 mr-1 max-sm:mr-0">&#8377; {{ items.product.price }}</span> <span class="line-through text-gray-500"> &#8377;{{ items.product.mrp_price }}</span></p>
+                        <p class="items-center max-sm:text-xs"><i class="icon ion-md-close"></i> {{ items.quantity }}</p>
+                        <p class="text-lg font-medium max-sm:text-sm">{{ items.total_price }}</p>
                     </div>
                 </div>
-                <div class="pt-5 my-4 border rounded-lg shadow-lg">
-                    <p class="px-10 text-xl underline">Total Bill :</p>
-                    <div>
-                        <div class="flex items-center justify-between p-2 px-10 mt-2">
-                            <p class="text-xl">Items </p>
-                            <p class="text-xl font-medium text-green-400">{{ itemsprice }} <span>&#8377;</span></p>
+                <!-- <div class="flex gap-3 w-full border-b-2 p-4 pt-5 max-sm:p-1 max-sm:pt-3 max-sm:gap-1">
+                    <img src="/public/images/product/ChocolateOwn.jpg" alt="" class="h-24 border max-sm:h-20 max-sm:w-20">
+                    <div class="flex justify-between w-full items-center">
+                        <div>
+                            <p class="font-medium max-sm:text-xs">Slipper <span>(1 pair)</span></p>
+                            <p class="text-sm font-medium max-sm:text-xs">VKC</p>
+                            <p class="w-56 text-xs max-sm:w-20">Lorem ipsum dolor sit amet consectetur adipisicing</p>
                         </div>
-                        <div class="flex items-center justify-between p-2 px-10">
-                            <p class="text-xl">Discount price </p>
-                            <p class="text-lg font-medium text-red-400">-{{ discountprice }} <span>&#8377;</span></p>
-                        </div>
-                        <div class="flex items-center justify-between p-2 px-10">
-                            <p class="text-xl">Shipping Fee</p>
-                            <p class="text-xl font-medium text-green-400">+{{ shipping_fee }} <span>&#8377;</span></p>
-                        </div>
-                        <div class="flex items-center justify-between p-2 px-10 mt-4 font-bold text-white bg-yellow-400 rounded-b-lg">
-                            <p class="text-2xl">Total Bill Amount</p>
-                            <p class="text-2xl font-medium">{{ total_bill }} <span>&#8377;</span></p>
-                        </div>
+                        <p class="max-sm:text-xs"><span class="text-red-400 mr-1 max-sm:mr-0">&#8377; 300</span> <span class="line-through text-gray-500"> &#8377;500</span></p>
+                        <p class="items-center max-sm:text-xs"><i class="icon ion-md-close"></i> 1</p>
+                        <p class="text-lg font-medium max-sm:text-sm">300</p>
+                    </div>
+                </div> -->
+            </div>
+            <div class="border p-5 my-4 shadow-md max-sm:p-2">
+                <p class="text-2xl px-3 underline max-sm:text-xl">Address :</p>
+                <div class="flex justify-between items-center p-3">
+                    <div class="">
+                        <p class="text-lg font-medium py-1 max-sm:text-md">{{ userInfo.name }}</p>
+                        <p class="py-1 text-lg max-sm:text-sm">{{ userInfo.phone_no }}</p>
+                        <p class="py-1 text-lg max-sm:text-sm">{{ userInfo.address }} {{ userInfo.city }} - {{ userInfo.pincode }}</p>
+                    </div>
+                    <div class="mr-5 max-sm:mr-0">
+                        <button class="text-xl text-blue-500 underline p-2 max-sm:text-sm">Change address</button>
                     </div>
                 </div>
             </div>
-            <div>
-                <form action="" class="border shadow-lg ">
-                    <p class="p-3 my-1 text-xl text-center underline">Your Info</p>
-                    <div class="px-10 py-5">
-                        <div class="p-1">
-                            <p>Name :</p>
-                            <input type="text" name="" id="" class="p-0.5 px-1.5 my-1 border w-48" v-model="userInfo.name">
-                        </div>
-                        <div class="p-1">
-                            <p>Phone :</p>
-                            <input type="number" name="" id="" class="p-0.5 px-1.5 my-1 border w-48" v-model="userInfo.phone_no">
-                        </div>
-                        <div class="p-1">
-                            <p>Email :</p>
-                            <input type="email" name="" id="" class="p-0.5 px-1.5 my-1 border w-48" v-model="userInfo.email">
-                        </div>
-                        <div class="p-1">
-                            <p>Address :</p>
-                            <textarea name="" class="p-0.5 px-1.5 my-1 border w-48" v-model="userInfo.address"></textarea>
-                        </div>
-                        <div class="p-1">
-                            <p>City :</p>
-                            <input type="text" name="" id="" class="p-0.5 px-1.5 my-1 border w-48" v-model="userInfo.city">
-                        </div>
-                        <div class="p-1">
-                            <p>Pincode :</p>
-                            <input type="number" name="" id="" class="p-0.5 px-1.5 my-1 border w-48" v-model="userInfo.pincode">
-                        </div>
-                        <div class="p-1 my-2 text-center">
-                            <button class="border">Change Address</button>
-                        </div>
+            <div class="border p-5 my-4 shadow-md max-sm:p-5 max-sm:my-2">
+                <p class="text-2xl px-3 underline max-sm:text-xl">Bill :</p>
+                <div class="p-3">
+                    <div class="flex items-center justify-between py-1">
+                        <p class="text-lg max-sm:text-md">Items </p>
+                        <p class="text-lg font-medium text-green-400 max-sm:text-md">{{ itemsprice }} <span>&#8377;</span></p>
                     </div>
-                </form>
-                <div class="p-2 mt-32 text-2xl text-center border rounded shadow-xl">
-                    <button @click="initiatePayment()">Place Order</button>
+                    <div class="flex items-center justify-between py-1">
+                        <p class="text-lg max-sm:text-md">Discount price </p>
+                        <p class="text-lg font-medium text-red-400 max-sm:text-md">- {{ discountprice }} <span>&#8377;</span></p>
+                    </div>
+                    <div class="flex items-center justify-between py-1">
+                        <p class="text-lg max-sm:text-md">Shipping Fee</p>
+                        <p class="text-lg font-medium text-green-400 max-sm:text-md">+{{ shipping_fee }} <span>&#8377;</span></p>
+                    </div>
+                    <div class="flex items-center justify-between px-2 mt-4 text-black bg-green-300">
+                        <p class="text-xl max-sm:text-md">Total Amount</p>
+                        <p class="text-2xl max-sm:text-xl">{{ total_bill }} <span>&#8377;</span></p>
+                    </div>
+                </div>
+                <div class="text-center mt-4 max-sm:mt-2">
+                    <button @click="initiatePayment()" class="px-4 py-2 text-xl bg-yellow-400 text-white font-medium rounded max-sm:text-md max-sm:px-3 max-sm:py-1">Place Order</button>
                 </div>
             </div>
         </div>
