@@ -21,20 +21,8 @@
                         <p class="text-lg font-medium max-sm:text-sm">{{ items.total_price }}</p>
                     </div>
                 </div>
-                <!-- <div class="flex gap-3 w-full border-b-2 p-4 pt-5 max-sm:p-1 max-sm:pt-3 max-sm:gap-1">
-                    <img src="/public/images/product/ChocolateOwn.jpg" alt="" class="h-24 border max-sm:h-20 max-sm:w-20">
-                    <div class="flex justify-between w-full items-center">
-                        <div>
-                            <p class="font-medium max-sm:text-xs">Slipper <span>(1 pair)</span></p>
-                            <p class="text-sm font-medium max-sm:text-xs">VKC</p>
-                            <p class="w-56 text-xs max-sm:w-20">Lorem ipsum dolor sit amet consectetur adipisicing</p>
-                        </div>
-                        <p class="max-sm:text-xs"><span class="text-red-400 mr-1 max-sm:mr-0">&#8377; 300</span> <span class="line-through text-gray-500"> &#8377;500</span></p>
-                        <p class="items-center max-sm:text-xs"><i class="icon ion-md-close"></i> 1</p>
-                        <p class="text-lg font-medium max-sm:text-sm">300</p>
-                    </div>
-                </div> -->
             </div>
+            <!-- Customer Details show div -->
             <div class="border p-5 my-4 shadow-md max-sm:p-2">
                 <p class="text-2xl px-3 underline max-sm:text-xl">Address :</p>
                 <div class="flex justify-between items-center p-3">
@@ -44,10 +32,39 @@
                         <p class="py-1 text-lg max-sm:text-sm">{{ userInfo.address }} {{ userInfo.city }} - {{ userInfo.pincode }}</p>
                     </div>
                     <div class="mr-5 max-sm:mr-0">
-                        <button class="text-xl text-blue-500 underline p-2 max-sm:text-sm">Change address</button>
+                        <button @click="showPopup = true" class="text-xl text-blue-500 underline p-2 max-sm:text-sm">Change address</button>
                     </div>
                 </div>
             </div>
+            <!-- Change Address Popup show here -->
+            <div v-if="showPopup" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+                <div class="bg-white p-6 rounded-lg shadow-lg w-96 max-sm:w-full">
+                    <h2 class="text-xl font-bold mb-4">Change Address</h2>
+                    <form @submit.prevent="updateAddress">
+                        <div class="mb-4">
+                            <label for="address" class="block font-medium">Address</label>
+                            <textarea id="address" v-model="address" class="w-full p-2 border rounded" rows="3" required></textarea>
+                        </div>
+                        <div class="mb-4">
+                            <label for="city" class="block font-medium">City</label>
+                            <input type="text" id="city" v-model="city"  class="w-full p-2 border rounded" required/>
+                        </div>
+                        <div class="mb-4">
+                            <label for="pincode" class="block font-medium">Pincode</label>
+                            <input type="text" id="pincode" v-model="pincode" class="w-full p-2 border rounded" required />
+                        </div>
+                        <div class="flex justify-end gap-4">
+                            <button type="button" @click="showPopup = false" class="px-4 py-2 bg-gray-200 text-gray-700 rounded" >
+                                Cancel
+                            </button>
+                            <button type="submit" @click="updateAddress" class="px-4 py-2 bg-blue-500 text-white rounded" >
+                                Save
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- total bill showing div -->
             <div class="border p-5 my-4 shadow-md max-sm:p-5 max-sm:my-2">
                 <p class="text-2xl px-3 underline max-sm:text-xl">Bill :</p>
                 <div class="p-3">
@@ -86,6 +103,10 @@ export default {
         return {
             userInfo : [],
             shipping_fee: 60,
+            showPopup: false,
+            address: '',
+            city: '',
+            pincode: '',
         }
     },
     methods: {
@@ -100,8 +121,28 @@ export default {
             .then(response => response.json())
             .then(data => {
                 this.userInfo = data;
-                // console.log(this.userInfo);
             })
+        },
+        updateAddress() {
+            const token = localStorage.getItem("api_token");
+            fetch("http://127.0.0.1:8000/api/edit-address", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    address: this.address,
+                    city: this.city,
+                    pincode: this.pincode,
+                }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                this.showPopup = false;
+            })
+            .catch(error => console.error(error));
         },
         
         initiatePayment() {
@@ -245,7 +286,7 @@ export default {
         },
     },
 
-    created() {
+    mounted() {
         this.GetUserData();
     },
     
