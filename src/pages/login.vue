@@ -49,7 +49,6 @@ export default {
         async comfirmLogin() {
             
             if((this.login.email != '') && (this.login.password != '')) {
-                console.log(this.login);
                 this.loading = true;
                 try {
 

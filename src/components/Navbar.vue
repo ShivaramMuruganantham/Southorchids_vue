@@ -18,7 +18,7 @@
                         <span class="px-4 py-1 font-bold text-white bg-black border rounded " @click="showDropdown">{{ name }} <i class="icon ion-md-arrow-dropdown"></i></span>
                     </button>
                     <div v-if="isClick == true" class="absolute top-[54px] -left-3 border w-32 shadow z-10 bg-white cursor-pointer">
-                        <p class="p-2 hover:bg-gray-200">Edit Profile</p>
+                        <p class="p-2 hover:bg-gray-200" @click="$router.push({name: 'profile'})">Profile</p>
                         <p class="p-2 hover:bg-gray-200" @click="$router.push({name: 'order_history'})">Your Orders</p>
                         <p class="p-2 hover:bg-gray-200" @click="logOut">Log Out</p>
                     </div>
@@ -34,7 +34,7 @@
                         <span class="px-4 py-1 font-bold text-white bg-black border rounded max-sm:text-xs max-sm:px-2 max-sm:py-1" @click="showDropdown">{{ name }} <i class="icon ion-md-arrow-dropdown"></i></span>
                     </button>
                     <div v-if="isClick == true" class="absolute top-[54px] -left-3 border w-32 shadow z-10 bg-white cursor-pointer max-sm:w-28 max-sm:top-12 max-sm:-left-5">
-                        <p class="p-2 hover:bg-gray-200 max-sm:text-sm">Edit Profile</p>
+                        <p class="p-2 hover:bg-gray-200 max-sm:text-sm" @click="$router.push({name: 'profile'})">Edit Profile</p>
                         <p class="p-2 hover:bg-gray-200 max-sm:text-sm" @click="$router.push({name: 'order_history'})">Your Orders</p>
                         <p class="p-2 hover:bg-gray-200 max-sm:text-sm" @click="logOut">Log Out</p>
                     </div>
