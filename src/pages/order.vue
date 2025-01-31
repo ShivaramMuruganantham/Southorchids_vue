@@ -111,9 +111,10 @@ export default {
     },
     methods: {
         GetUserData() {
+            const store = useStore();
             const token = localStorage.getItem("api_token");
             
-            fetch("http://127.0.0.1:8000/api/user-info", {
+            fetch(`${store.api_url}/user-info`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -124,8 +125,9 @@ export default {
             })
         },
         updateAddress() {
+            const store = useStore();
             const token = localStorage.getItem("api_token");
-            fetch("http://127.0.0.1:8000/api/edit-address", {
+            fetch(`${store.api_url}/edit-address`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -146,6 +148,7 @@ export default {
         },
         
         initiatePayment() {
+            const store = useStore();
             const token = localStorage.getItem("api_token");
             const orderItems = this.ordersItems.map(item => ({
                 product_id : item.product_id,
@@ -154,7 +157,7 @@ export default {
             
             const amount = this.total_bill * 100; // Convert to paise (Razorpay uses smallest currency unit)
             
-            fetch("http://127.0.0.1:8000/api/create-order", {
+            fetch(`${store.api_url}/create-order`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -211,9 +214,10 @@ export default {
         },
         
         handlePaymentSuccess(orderId, paymentResponse) {
+            const store = useStore();
             const token = localStorage.getItem("api_token");
 
-            fetch("http://127.0.0.1:8000/api/payment-success", {
+            fetch(`${store.api_url}/payment-success`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -240,9 +244,10 @@ export default {
         },
 
         handlePaymentFailure(orderId, errorResponse) {
+            const store = useStore();
             const token = localStorage.getItem("api_token");
 
-            fetch("http://127.0.0.1:8000/api/payment-failure", {
+            fetch(`${store.api_url}/payment-failure`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

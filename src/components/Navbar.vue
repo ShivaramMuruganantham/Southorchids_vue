@@ -1,7 +1,7 @@
 <template>
     <div class="">
         <div class="fixed inset-x-0 z-20 flex justify-between items-center p-1 bg-white border px-14 max-md:px-5 max-sm:px-5" ref="navbarStyle" :class="isTop ? 'bg-transparent' : 'bg-white'">
-            <div>
+            <div @click="$router.push({name: 'home'})">
                 <img src="../../public/Logo/logo so.png" alt="Southorchids" class="w-20 h-20 max-md:w-16 max-md:h-[72px] max-sm:w-16 max-sm:h-16">
             </div>
             <div class="flex items-center gap-10 cursor-pointer max-md:gap-5 max-md:text-sm max-sm:hidden">

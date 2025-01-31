@@ -30,6 +30,7 @@
 </template>
 
 <script>
+import { useStore } from '@/store';
 import ValidationForm from '@/mixins/forms/ValidationForm';
 import LoggedIn from '@/mixins/LoggedIn';
 
@@ -47,12 +48,13 @@ export default {
 
     methods: {
         async comfirmLogin() {
+            const store = useStore();
             
             if((this.login.email != '') && (this.login.password != '')) {
                 this.loading = true;
                 try {
 
-                    const response = await fetch("http://127.0.0.1:8000/api/login", {
+                    const response = await fetch(`${store.api_url}/login`, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({

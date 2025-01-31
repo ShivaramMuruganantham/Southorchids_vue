@@ -40,6 +40,8 @@
 </template>
 
 <script>
+import { useStore } from '@/store';
+
 export default {
     data() {
         return {
@@ -49,7 +51,9 @@ export default {
 
     methods: {
         async editProfile() {
-            const response = await fetch('http://127.0.0.1:8000/api/edit-address', {
+            const store = useStore();
+
+            const response = await fetch(`${store.api_url}/edit-address`, {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json', 
                         'Authorization': `Bearer ${localStorage.getItem('api_token')}
@@ -73,7 +77,8 @@ export default {
     },
 
     mounted() {
-        fetch('http://127.0.0.1:8000/api/user-info', {
+        const store = useStore();
+        fetch(`${store.api_url}/user-info`, {
           headers: {'Authorization': `Bearer ${localStorage.getItem('api_token')}`}
           })
           .then(res => res.json())

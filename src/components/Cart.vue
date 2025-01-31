@@ -70,8 +70,9 @@ export default {
 
         getCartItems(){
             const token = localStorage.getItem('api_token');
+            const store = useStore();
             
-            fetch("http://127.0.0.1:8000/api/cart", {
+            fetch(`${store.api_url}/cart`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -132,8 +133,9 @@ export default {
 
         deleteCart(pid) {
             const token = localStorage.getItem("api_token");
+            const store = useStore();
             
-            fetch(`http://127.0.0.1:8000/api/cart/remove/${pid}`, {
+            fetch(`${store.api_url}/cart/remove/${pid}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',

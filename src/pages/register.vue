@@ -65,6 +65,7 @@
 </template>
 
 <script>
+import { useStore } from '@/store';
 import ValidationForm from '@/mixins/forms/ValidationForm';
 import router from '@/router';
 
@@ -89,6 +90,7 @@ export default {
     methods: {
 
         SubmitForm() {
+            const store = useStore();
             const NameValid = this.NameValidation(this.form.name);
             const EmailValid = this.MailValidation(this.form.email);
             const PasswordValid = this.PasswordValidation(this.form.password);
@@ -110,7 +112,7 @@ export default {
                     pincode : this.form.pincode,
                 };
                 
-                fetch("http://localhost:8000/api/signup",{
+                fetch(`${store.api_url}/signup`,{
                     method: 'POST',
                     headers: {'Content-Type': 'application/json',},
                     body: JSON.stringify(formData),

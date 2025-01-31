@@ -40,6 +40,7 @@
 </template>
 
 <script>
+import { useStore } from '@/store';
 import Navbar from '@/components/Navbar.vue';
 import Footer from '@/components/Footer.vue';
 
@@ -68,20 +69,21 @@ export default {
         },
 
         AddCart(productId, quantity) {
+            const store = useStore();
+            const token = localStorage.getItem('api_token');
 
             if(quantity <= 0){
                 alert('Please add at least one quantity to add the cart.');
                 return;
             }
 
-            const token = localStorage.getItem('api_token');
 
             if(!token){
                 alert("Please login to add items in the cart.");
                 return;
             }
 
-            fetch('http://127.0.0.1:8000/api/cart/add',{
+            fetch(`${store.api_url}/cart/add`,{
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -109,7 +111,8 @@ export default {
     },
     
     created() {
-        fetch("http://127.0.0.1:8000/api/products")
+        const store = useStore();
+        fetch(`${store.api_url}/products`)
         .then(resp => resp.json())
         .then(data => {
             this.products = data.map(product => ({

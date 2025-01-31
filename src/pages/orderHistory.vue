@@ -41,6 +41,7 @@
 </template>
 
 <script>
+import { useStore } from '@/store';
 export default {
     name: 'OrderHistory',
     data() {
@@ -51,8 +52,9 @@ export default {
     
     methods: {
         showOrderHistroy(){
+            const store = useStore();
             const token = localStorage.getItem('api_token');
-            fetch("http://127.0.0.1:8000/api/order-history", {
+            fetch(`${ store.api_url }/order-history`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
