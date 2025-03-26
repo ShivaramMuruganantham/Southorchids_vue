@@ -28,7 +28,7 @@
             </div>
         </div>
         <div class="bg-[#1b1a1ae5] text-white text-center p-2">
-            <p class="text-sm text-[#f6f2f2b1] max-sm:text-xs"> &copy; 2024, Southorchids Powered By (Domain Name) </p>
+            <p class="text-sm text-[#f6f2f2b1] max-sm:text-xs"> &copy; 2024, Southorchids Powered By Shivaram</p>
         </div>
     </div>
 </template>
